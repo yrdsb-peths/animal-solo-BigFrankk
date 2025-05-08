@@ -25,6 +25,19 @@ public class Elephant extends Actor
         }
         
         //ELEPHANT EAT
-        removeTouching(Apple.class);
+        eat();
+    }
+    /**
+     * This method we want create a new apple after the apple is eaten by
+     * the elephants.
+     */
+    public void eat()
+    {
+        if(isTouching(Apple.class))
+        {
+            removeTouching(Apple.class);
+            MyWorld world = (MyWorld) getWorld();
+            world.createApple();
+        }
     }
 }
