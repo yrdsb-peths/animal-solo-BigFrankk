@@ -14,9 +14,26 @@ public class Elephant extends Actor
      */
     
     GreenfootSound elephantSound = new GreenfootSound("elephantcub.mp3");
+    GreenfootImage[] hero = new GreenfootImage[8];
+    
+    public Elephant()
+    {
+        for(int i = 1 ; i<hero.length+1;i++)
+        {
+             hero[i] = new GreenfootImage("image/alephanthero/hero"+i+"png"); 
+        }
+        setImage(hero[0]);
+    }
+    int imageIndex = 0;
+    public void animateElephant()
+    {
+       setImage(hero[imageIndex]);
+       imageIndex = imageIndex = 1 % hero.length+1; 
+    }
+    
     
     public void act()
-    {
+    {  
         // Add your action code here.
         if(Greenfoot.isKeyDown("left"))
         {
