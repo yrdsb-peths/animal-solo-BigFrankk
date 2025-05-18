@@ -19,7 +19,7 @@ public class Elephant extends Actor
     
     
     String facing = "right";
-    
+    SimpleTimer animationTimer = new SimpleTimer();
     public Elephant()
     {
         for(int i = 0 ; i<heroRight.length;i++)
@@ -33,11 +33,18 @@ public class Elephant extends Actor
              heroLeft[i].mirrorHorizontally();
              heroLeft[i].scale(100,100);
         }
+        
+        animationTimer.mark();
         setImage(heroRight[0]);
     }
     int imageIndex = 0;
     public void animateElephant()
     {
+       if(animationTimer.millisElapsed() < 200)
+       {
+           return;
+       }
+       animationTimer.mark();
        if(facing.equals("right"))
        {
            setImage(heroRight[imageIndex]);
@@ -50,6 +57,7 @@ public class Elephant extends Actor
        }
        
     }
+    
     
     
     public void act()
@@ -70,6 +78,7 @@ public class Elephant extends Actor
         eat();
         
         animateElephant();
+        
     }
     /**
      * This method we want create a new apple after the apple is eaten by
