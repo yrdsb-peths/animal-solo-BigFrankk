@@ -14,21 +14,41 @@ public class Elephant extends Actor
      */
     
     GreenfootSound elephantSound = new GreenfootSound("elephantcub.mp3");
-    GreenfootImage[] hero = new GreenfootImage[8];
+    GreenfootImage[] heroRight = new GreenfootImage[8];
+    GreenfootImage[] heroLeft = new GreenfootImage[8];
+    
+    
+    String facing = "right";
     
     public Elephant()
     {
-        for(int i = 1 ; i<hero.length+1;i++)
+        for(int i = 0 ; i<heroRight.length;i++)
         {
-             hero[i] = new GreenfootImage("image/alephanthero/hero"+i+"png"); 
+             heroRight[i] = new GreenfootImage("images/elephanthero/hero"+i+".png"); 
+             heroRight[i].scale(100,100);
         }
-        setImage(hero[0]);
+        for(int i = 0 ; i<heroLeft.length;i++)
+        {
+             heroLeft[i] = new GreenfootImage("images/elephanthero/hero"+i+".png"); 
+             heroLeft[i].mirrorHorizontally();
+             heroLeft[i].scale(100,100);
+        }
+        setImage(heroRight[0]);
     }
     int imageIndex = 0;
     public void animateElephant()
     {
-       setImage(hero[imageIndex]);
-       imageIndex = imageIndex = 1 % hero.length+1; 
+       if(facing.equals("right"))
+       {
+           setImage(heroRight[imageIndex]);
+           imageIndex = (imageIndex + 1) % heroRight .length; 
+       }
+       else
+       {
+           setImage(heroLeft[imageIndex]);
+           imageIndex = (imageIndex + 1) % heroLeft .length; 
+       }
+       
     }
     
     
@@ -38,14 +58,18 @@ public class Elephant extends Actor
         if(Greenfoot.isKeyDown("left"))
         {
             move(-2);
+            facing = "left";
         }
         else if (Greenfoot.isKeyDown("right"))
         {
             move(2);
+            facing = "right";
         }
         
         //ELEPHANT EAT
         eat();
+        
+        animateElephant();
     }
     /**
      * This method we want create a new apple after the apple is eaten by
