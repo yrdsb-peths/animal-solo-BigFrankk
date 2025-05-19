@@ -17,9 +17,13 @@ public class Elephant extends Actor
     GreenfootImage[] heroRight = new GreenfootImage[8];
     GreenfootImage[] heroLeft = new GreenfootImage[8];
     
+    boolean canUseSpace = false;
+    int lastPowerScore = 0;
     
     String facing = "right";
     SimpleTimer animationTimer = new SimpleTimer();
+    
+    
     public Elephant()
     {
         for(int i = 0 ; i<heroRight.length;i++)
@@ -40,7 +44,7 @@ public class Elephant extends Actor
     int imageIndex = 0;
     public void animateElephant()
     {
-       if(animationTimer.millisElapsed() < 200)
+       if(animationTimer.millisElapsed() < 100)
        {
            return;
        }
@@ -61,7 +65,7 @@ public class Elephant extends Actor
     
     
     public void act()
-    {  
+    {   
         // Add your action code here.
         if(Greenfoot.isKeyDown("left"))
         {
@@ -73,13 +77,13 @@ public class Elephant extends Actor
             move(2);
             facing = "right";
         }
-        
-        //ELEPHANT EAT
         eat();
         
         animateElephant();
-        
     }
+        
+        //ELEPHANT EAT
+        
     /**
      * This method we want create a new apple after the apple is eaten by
      * the elephants.
@@ -96,3 +100,4 @@ public class Elephant extends Actor
         }
     }
 }
+
